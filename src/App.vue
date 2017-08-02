@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <turtle-header></turtle-header>
     <router-link v-bind:to="'/'">
       <img src="./assets/logo.png">
     </router-link>
@@ -8,8 +9,13 @@
 </template>
 
 <script>
+import TurtleHeader from '@/components/common/TurtleHeader'
+
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+    TurtleHeader
+  }
 }
 </script>
 
@@ -20,6 +26,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
