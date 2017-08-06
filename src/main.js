@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 
 import 'bulma/css/bulma.css'
+import 'firebaseui/dist/firebaseui.css'
 
 Vue.config.productionTip = false
 

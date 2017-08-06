@@ -26,21 +26,32 @@
 </template>
 
 <script>
+import { firebaseApp } from '@/helpers/firebase'
+
 export default {
   name: 'headerv',
   data (){
+    var user= firebaseApp.auth().currentUser;
+    var menus = {
+      '사용자' : [],
+      '팁' : [
+        { name :'초임교사', link:'/'},
+        { name :'현장학습', link:'/'}
+      ],
+      '정보' : [
+        { name :'법', link:'/law'},
+        { name :'보조공학', link:'/'},
+      ]
+    };
+    const logged = [{ name :'회원정보', link:'/'},{ name :'로그아웃', link:'/'}];
+    const guest = [{ name :'로그인', link:'/auth'},{ name :'회원가입', link:'/'}];
+
+    menus['사용자'] = user ? logged : guest ;
+    user && alert(user.displayName);
+
     return {
       appName : '터틀런',
-      menus : {
-        '팁' : [
-          { name :'초임교사', link:'/'},
-          { name :'현장학습', link:'/'}
-        ],
-        '정보' : [
-          { name :'법', link:'/law'},
-          { name :'보조공학', link:'/'},
-        ]
-      }
+      menus : menus
     }
   }
 }
