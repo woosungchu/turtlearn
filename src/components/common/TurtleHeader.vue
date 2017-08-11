@@ -26,32 +26,40 @@
 </template>
 
 <script>
-import { firebaseApp } from '@/helpers/firebase'
+import firebase from 'firebase'
 
 export default {
   name: 'headerv',
+  beforeMount(){
+      let currentUser= firebase.auth().currentUser;
+      this.menus = {
+        '사용자' : [],
+        '팁' : [{ name :'초임교사', link:'/'},{ name :'현장학습', link:'/'}],
+        '정보' : [{ name :'법', link:'/law'},{ name :'보조공학', link:'/'}]
+      };
+      const logged = [{ name :'회원정보', link:'/'},{ name :'로그아웃', link:'/'}];
+      const guest = [{ name :'로그인', link:'/auth'},{ name :'회원가입', link:'/'}];
+
+      if(currentUser){
+        this.menus['사용자'] = logged;
+      }else{
+        let authListenerUnsuscribe = firebase.auth().onAuthStateChanged(user => {
+          //onAuthStateChanged can pass null when logout
+          if (user) {
+            this.menus['사용자'] = logged;
+            authListenerUnsuscribe(); //Stop listening for changes
+          }else{
+            this.menus['사용자'] = guest;
+          }
+        });
+      }
+
+      //alert(user ? user.displayName : 'empty');
+  },
   data (){
-    var user= firebaseApp.auth().currentUser;
-    var menus = {
-      '사용자' : [],
-      '팁' : [
-        { name :'초임교사', link:'/'},
-        { name :'현장학습', link:'/'}
-      ],
-      '정보' : [
-        { name :'법', link:'/law'},
-        { name :'보조공학', link:'/'},
-      ]
-    };
-    const logged = [{ name :'회원정보', link:'/'},{ name :'로그아웃', link:'/'}];
-    const guest = [{ name :'로그인', link:'/auth'},{ name :'회원가입', link:'/'}];
-
-    menus['사용자'] = user ? logged : guest ;
-    user && alert(user.displayName);
-
     return {
       appName : '터틀런',
-      menus : menus
+      menus : []
     }
   }
 }
