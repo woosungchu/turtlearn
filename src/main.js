@@ -14,14 +14,15 @@ new Vue({
   el: '#app',
   router,
   beforeCreate() {
-    firebase.initializeApp(firebaseConfig);
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        alert('current User : ' + user.displayName);
+        //alert('current User : ' + user.displayName);
       } else {
-        alert('empty user')
+        //alert('empty user')
        }
-      this.$router.push('/')
     });
   },
   template: '<App/>',

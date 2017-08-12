@@ -8,13 +8,28 @@
         </router-link>
       </div>
 
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">사용자</a>
+        <div class="navbar-dropdown" v-if="isGuest">
+          <a class="navbar-item">
+            <router-link v-bind:to="'/auth'" class="nav-item">로그인</router-link>
+          </a>
+        </div>
+        <div class="navbar-dropdown" v-else>
+          <a class="navbar-item">
+            <router-link v-bind:to="'/'" class="nav-item">회원정보</router-link>
+          </a>
+          <a class="navbar-item">
+            <a class="nav-item" @click=logout >로그아웃</a>
+          </a>
+        </div>
+      </div>
+
       <div class="navbar-item has-dropdown is-hoverable" v-for="(values, key) in menus">
-        <a class="navbar-link">
-          {{ key }}
-        </a>
+        <a class="navbar-link">{{ key }}</a>
         <div class="navbar-dropdown">
           <a class="navbar-item" v-for="value in values">
-            <router-link v-bind:to=value.link class="nav-item is-active">
+            <router-link v-bind:to=value.link class="nav-item">
              {{ value.name }}
             </router-link>
           </a>
@@ -32,34 +47,39 @@ export default {
   name: 'headerv',
   beforeMount(){
       let currentUser= firebase.auth().currentUser;
-      this.menus = {
-        '사용자' : [],
-        '팁' : [{ name :'초임교사', link:'/'},{ name :'현장학습', link:'/'}],
-        '정보' : [{ name :'법', link:'/law'},{ name :'보조공학', link:'/'}]
-      };
-      const logged = [{ name :'회원정보', link:'/'},{ name :'로그아웃', link:'/'}];
-      const guest = [{ name :'로그인', link:'/auth'},{ name :'회원가입', link:'/'}];
 
       if(currentUser){
-        this.menus['사용자'] = logged;
+        this.isGuest = false;
       }else{
         let authListenerUnsuscribe = firebase.auth().onAuthStateChanged(user => {
-          //onAuthStateChanged can pass null when logout
           if (user) {
-            this.menus['사용자'] = logged;
-            authListenerUnsuscribe(); //Stop listening for changes
+            this.isGuest = false;
+            authListenerUnsuscribe();
           }else{
-            this.menus['사용자'] = guest;
+            this.isGuest = true;
+            // this.$router.push('/');
           }
         });
       }
-
-      //alert(user ? user.displayName : 'empty');
   },
   data (){
     return {
       appName : '터틀런',
-      menus : []
+      isGuest : true,
+      menus : {
+      '팁' : [{ name :'초임교사', link:'/'},{ name :'현장학습', link:'/'}],
+      '정보' : [{ name :'법', link:'/law'},{ name :'보조공학', link:'/'}]
+      }
+    }
+  },
+  methods : {
+    logout(){
+      firebase.auth().signOut().then(function() {
+        window.location.reload()
+      }, function(error) {
+        console.error('Sign Out Error', error);
+        window.location.reload();
+      });
     }
   }
 }
