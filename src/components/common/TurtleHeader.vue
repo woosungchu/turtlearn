@@ -42,22 +42,20 @@
 
 <script>
 import firebase from 'firebase'
+import auth from '@/auth';
 
 export default {
   name: 'headerv',
   beforeMount(){
-      let currentUser= firebase.auth().currentUser;
-
-      if(currentUser){
+      if(firebase.auth().currentUser){
         this.isGuest = false;
       }else{
-        let authListenerUnsuscribe = firebase.auth().onAuthStateChanged(user => {
+        let authListener = firebase.auth().onAuthStateChanged(user => {
           if (user) {
             this.isGuest = false;
-            authListenerUnsuscribe();
+            authListener();
           }else{
             this.isGuest = true;
-            // this.$router.push('/');
           }
         });
       }
@@ -73,14 +71,7 @@ export default {
     }
   },
   methods : {
-    logout(){
-      firebase.auth().signOut().then(function() {
-        window.location.reload()
-      }, function(error) {
-        console.error('Sign Out Error', error);
-        window.location.reload();
-      });
-    }
+    logout : auth.logout
   }
 }
 </script>

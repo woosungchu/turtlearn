@@ -3,10 +3,10 @@ import App from './App'
 import router from './router'
 
 import 'bulma/css/bulma.css'
-import 'firebaseui/dist/firebaseui.css'
 
 import firebase from 'firebase'
 import { firebaseConfig } from './helpers/firebase'
+import auth from './auth';
 
 Vue.config.productionTip = false
 
@@ -14,16 +14,8 @@ new Vue({
   el: '#app',
   router,
   beforeCreate() {
-    if (!firebase.apps.length) {
-      firebase.initializeApp(firebaseConfig);
-    }
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        //alert('current User : ' + user.displayName);
-      } else {
-        //alert('empty user')
-       }
-    });
+    firebase.initializeApp(firebaseConfig);
+    firebase.auth().onAuthStateChanged(auth.bindUser);
   },
   template: '<App/>',
   components: { App }
