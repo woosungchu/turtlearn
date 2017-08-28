@@ -3,6 +3,7 @@ import App from './App'
 import router from './router'
 
 import 'bulma/css/bulma.css'
+import 'font-awesome/css/font-awesome.css'
 
 import firebase from 'firebase'
 import { firebaseConfig } from './helpers/firebase'
