@@ -15,7 +15,9 @@
                 <i class="fa fa-chevron-down"></i>
               </span>
             </a>
-            <a class="button is-outlined is-pulled-right">NEW</a>
+            <router-link v-bind:to="'/class/new'" class="button is-outlined is-pulled-right">
+            	NEW
+            </router-link>
           </p>
           <hr>
           <p class="event-item">
@@ -163,23 +165,14 @@
 
 <script>
 export default {
-  name: 'home',
+  name: 'class',
 
   data () {
     return {
-      msg: 'Welcome to Home',
-      items: []
+      msg: 'Welcome to Home'
     }
-  },
-
-  created(){
-    this.$router.options.routes.forEach(route => {
-      this.items.push({
-          name: route.name
-          , path: route.path
-      })
-    })
   }
+
 }
 </script>
 
