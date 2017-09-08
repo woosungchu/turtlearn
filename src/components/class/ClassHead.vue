@@ -8,14 +8,10 @@
 	      <a class="is-5" href="#">
 	      	<strong class="ellipsis">KedServiceImpl.js</strong>
 	      </a>
-	      <div class="tags">
-	      	<p class="ellipsis">
-		      	<span class="tag">Tag</span>
-		      	<span class="tag">Tag2</span>
-		      	<span class="tag">Tag2</span>
-		      	<span class="tag">Tag2</span>
-		      	<span class="tag">Tag2</span>
-	      	</p>
+	      <div class="tags ellipsis">
+	      	<span title="Tag, Tag, Tag, Tag, Tag, Tag, Tag, Tag, Tag, Tag, Tag, Tag, Tag">
+	      		Tag, Tag, Tag, Tag, Tag, Tag, Tag, Tag, Tag, Tag, Tag, Tag, Tag
+	      	</span>  
 	      </div>
       </div>
     </div>
@@ -23,7 +19,7 @@
   </div>
   <div class="level-right">
     <p class="level-item">
-    	<a href="#">See all of your classes</a>
+    	<a href="#" class="pt28">See all of your classes</a>
     </p>
   </div>
 </nav>
@@ -48,13 +44,13 @@ export default {
   text-decoration:underline;
 }
 .class-item .tags{
-  line-height:1em;
+  display:block;
+  line-height:1.3em;
+  font-size : 0.75rem;
 }
-
-.tag {
-  font-size : 0.7rem;
+.class-item .tags .tag {
   margin-right: 0.1rem;
   margin-bottom: 0px;
-  height:1em;
+  height:1.5em;
 }
 </style>

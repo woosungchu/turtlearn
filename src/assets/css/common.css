@@ -2,5 +2,6 @@
 .mr10{margin-right:10px;}
 .pt10{padding-top:10px}
 .pt20{padding-top:20px}
+.pt28{padding-top:28px}
 
-.ellipsis{text-overflow:ellipsis; -o-text-overflow:ellipsis;-ms-text-overflow:ellipsis;vertical-align:top;white-space:nowrap;}
+.ellipsis{white-space:nowrap;overflow:hidden; text-overflow:ellipsis; -o-text-overflow:ellipsis;-ms-text-overflow:ellipsis;vertical-align:top;}
