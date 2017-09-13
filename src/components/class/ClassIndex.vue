@@ -1,21 +1,14 @@
 <template>
 <div>
-  <div class="column is-10 is-offset-1">
-    <div class="columns">
+    <div class="row">
     
-      <div class="column is-8">
+      <div class="column column-66">
         <div class=" event-timeline">
           <p>
-            <a class="button is-light">
-              <span class="icon">
-                <img src="https://placehold.it/64x64">
-              </span>
-              <span>username</span>
-              <span class="icon icon-chevron">
-                <i class="fa fa-chevron-down"></i>
-              </span>
-            </a>
-            <router-link v-bind:to="'/class/new'" class="button is-outlined is-pulled-right">
+            <select style="width:30%;">
+            	<option value="username">username</option>
+            </select>
+            <router-link v-bind:to="'/class/new'" class="button float-right">
             	NEW
             </router-link>
           </p>
@@ -55,7 +48,7 @@
         </div>
       </div>
       
-      <div class="column is-4">
+      <div class="column">
         <nav class="panel">
           <p class="panel-heading">
             Repositories you contribute to
@@ -159,7 +152,6 @@
         </nav>
       </div>
     </div>
-  </div>
 </div>
 </template>
 
