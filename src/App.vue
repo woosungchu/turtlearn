@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <main id="app" class="wrapper">
     <turtle-header></turtle-header>
     <!--
     <router-link v-bind:to="'/'">
@@ -13,7 +13,7 @@
       </div>
     </section>
 
-  </div>
+  </main>
 </template>
 
 <script>
@@ -31,7 +31,8 @@ export default {
 @import 'assets/css/common.css';
 
 #app {
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  /*font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";*/
+  font-family: 'Helvetica Neue', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 14px;

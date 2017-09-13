@@ -1,42 +1,24 @@
 <template>
-  <nav id="header" class="navbar">
-    <div class="container">
+  <nav id="header" class="navigation">
+    <section class="container">
 
-      <div class="nav-left">
-        <router-link v-bind:to="'/'" class="nav-item is-active">
-         {{appName}}
-        </router-link>
-      </div>
+      <router-link v-bind:to="'/'" class="nav-title">
+       {{appName}}
+      </router-link>
+      
+      <ul class="nav-list float-right">
+        <li class="nav-item" v-if="isGuest">
+			<router-link v-bind:to="'/auth'" class="popover-link">로그인</router-link>
+		</li>
+		<li class="nav-item" v-if="!isGuest">
+			<router-link v-bind:to="'/'" class="nav-item">회원정보</router-link>
+		</li>
+		<li class="nav-item" v-if="!isGuest">
+			<a @click=logout >로그아웃</a>
+		</li>
+	  </ul>
 
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">사용자</a>
-        <div class="navbar-dropdown" v-if="isGuest">
-          <a class="navbar-item">
-            <router-link v-bind:to="'/auth'" class="nav-item">로그인</router-link>
-          </a>
-        </div>
-        <div class="navbar-dropdown" v-else>
-          <a class="navbar-item">
-            <router-link v-bind:to="'/'" class="nav-item">회원정보</router-link>
-          </a>
-          <a class="navbar-item">
-            <a class="nav-item" @click=logout >로그아웃</a>
-          </a>
-        </div>
-      </div>
-
-      <div class="navbar-item has-dropdown is-hoverable" v-for="(values, key) in menus">
-        <a class="navbar-link">{{ key }}</a>
-        <div class="navbar-dropdown">
-          <a class="navbar-item" v-for="value in values">
-            <router-link v-bind:to=value.link class="nav-item">
-             {{ value.name }}
-            </router-link>
-          </a>
-        </div>
-      </div>
-
-    </div>
+    </section>
   </nav>
 </template>
 
@@ -85,6 +67,24 @@ export default {
 
 #header * {
   color: #00d1b2;
+}
+
+.nav-title{
+    display: inline;
+    font-size: 1.6rem;
+    line-height: 5.2rem;
+    padding: 0;
+    text-decoration: none;
+}
+
+.nav-list{
+	margin-top:13px
+}
+
+.nav-item{
+	float:left;
+	list-style:none;
+	margin-left: 12px;
 }
 
 </style>

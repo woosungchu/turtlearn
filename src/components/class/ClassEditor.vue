@@ -33,9 +33,8 @@ export default {
 <style scoped>
 #class-editor {
   margin: 0;
-  height: 100%;
+  height: 500px;
   color: #333;
-  /*font-family: 'Helvetica Neue', Arial, sans-serif;*/
 }
 
 textarea, #class-editor div {
@@ -44,7 +43,8 @@ textarea, #class-editor div {
   height: 100%;
   vertical-align: top;
   box-sizing: border-box;
-  padding: 0 20px;
+  padding: 20px;
+  overflow-y:scroll;
 }
 
 textarea {
@@ -55,7 +55,6 @@ textarea {
   background-color: #f6f6f6;
   font-size: 14px;
   font-family: 'Monaco', courier, monospace;
-  padding: 20px;
 }
 
 code {
