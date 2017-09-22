@@ -3,12 +3,12 @@
 
   <div id="class-topic">
 	<ul class="list-style-none d-inline">
-	   	<li class="tag float-left">
-	   		<span>vue</span><button>X</button>
-	   		<input id="class_topics[]" class="" type="hidden" autocomplete="off" autofocus="">
+	   	<li class="tag float-left" v-for="(topic,i) in topics">
+	   		<span>{{topic}}</span><button @click="removeTag(i)">X</button>
+	   		<input id="class_topics[]" type="hidden" autocomplete="off" autofocus="">
 		</li>
 	</ul>
-   	<input id="class-topic-input" class="" type="text" autocomplete="off" autofocus="" placeholder="국어 언어유창성 의사소통">
+   	<input id="class-topic-input" @keypress="insertTag" type="text" autocomplete="off" autofocus="" placeholder="국어 언어유창성 의사소통">
   </div>
   <turtle-markdown-editor v-bind:name="editorName" v-bind:value="editorContents"></turtle-markdown-editor>
 </div>
@@ -25,7 +25,20 @@ export default {
   data () {
     return {
       editorName: "contents",
-      editorContents : ""
+      editorContents : "",
+      topics : ['vue','javascript','java','fluency']
+    }
+  },
+  methods : {
+    removeTag : function(index){
+    	this.topics.splice(index,1);
+    },
+    insertTag : function(e){
+    	let input = e.target.value.trim();
+    	
+    	if(e.keyCode === 13 && input){
+    		this.topics.push(input);
+    	}
     }
   }
 
