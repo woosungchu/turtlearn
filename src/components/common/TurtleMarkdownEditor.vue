@@ -39,9 +39,13 @@ export default {
   color: #333;
 }
 
-textarea, #turtle-markdown-editor div {
+#turtle-markdown-editor > div{
+  float:right;
+}
+
+textarea, #turtle-markdown-editor > div {
   display: inline-block;
-  width: 49%;
+  width: 49.5%;
   height: 100%;
   vertical-align: top;
   box-sizing: border-box;
