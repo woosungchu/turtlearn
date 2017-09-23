@@ -5,7 +5,7 @@
       <router-link v-bind:to="'/'" class="nav-title">
        {{appName}}
       </router-link>
-      
+
       <ul class="nav-list float-right">
         <li class="nav-item" v-if="isGuest">
 			<router-link v-bind:to="'/auth'" class="popover-link">로그인</router-link>
@@ -14,7 +14,7 @@
 			<router-link v-bind:to="'/'" class="nav-item">회원정보</router-link>
 		</li>
 		<li class="nav-item" v-if="!isGuest">
-			<a @click=logout >로그아웃</a>
+			<a id="btn-logout" @click=logout >로그아웃</a>
 		</li>
 	  </ul>
 
@@ -87,4 +87,7 @@ export default {
 	margin-left: 12px;
 }
 
+#btn-logout {
+  cursor:pointer;
+}
 </style>

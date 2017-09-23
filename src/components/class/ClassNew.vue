@@ -13,11 +13,6 @@
 <script>
 import ClassHead from '@/components/class/ClassHead'
 import ClassEditor from '@/components/class/ClassEditor'
-import firebase from 'firebase'
-
-console.log(firebase.database())
-//let classRef = db.ref('class');
-//console.log(classRef)
 
 export default {
   name: 'class-new',

@@ -9,14 +9,14 @@ import firebase from 'firebase'
 import { firebaseConfig } from './helpers/firebase'
 import auth from './auth';
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+Vue.prototype.$firebase = firebase.initializeApp(firebaseConfig);
 
 new Vue({
   el: '#app',
   router,
   beforeCreate() {
-    firebase.initializeApp(firebaseConfig);
-    firebase.auth().onAuthStateChanged(auth.bindUser);
+    this.$firebase.auth().onAuthStateChanged(auth.bindUser);
   },
   template: '<App/>',
   components: { App }
