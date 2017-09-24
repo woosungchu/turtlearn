@@ -6,13 +6,16 @@
 	  <class-editor></class-editor>
 	</div>
 
-	<a class="button button-clear float-right" href="#"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>
+	<a class="button button-clear float-right" href="#" @click="register">
+		<i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
+	</a>
 </div>
 </template>
 
 <script>
 import ClassHead from '@/components/class/ClassHead'
 import ClassEditor from '@/components/class/ClassEditor'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'class-new',
@@ -20,11 +23,22 @@ export default {
 	  ClassHead,ClassEditor
   },
 
-  data () {
-    return {
-      msg: 'Welcome to Home'
-    }
-  }
+	computed: {
+		...mapGetters(['allClasses']),
+		classes(){
+			return this.allClasses.map(item => {
+				return item;
+			})
+		}
+
+	},
+
+	methods : {
+		addClass(){
+			let contents = '### test3';
+			this.$store.dispatch('addClassItem', {contents});
+		}
+	}
 
 }
 </script>
