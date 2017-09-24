@@ -5,18 +5,18 @@ import router from './router'
 import 'milligram/dist/milligram.min.css'
 import 'font-awesome/css/font-awesome.css'
 
-import firebase from 'firebase'
-import { firebaseConfig } from './helpers/firebase'
+import {store} from './store'
 import auth from './auth';
+import {firebaseApp} from '@/firebase'
 
 Vue.config.productionTip = false;
-Vue.prototype.$firebase = firebase.initializeApp(firebaseConfig);
 
 new Vue({
   el: '#app',
   router,
+  store,
   beforeCreate() {
-    this.$firebase.auth().onAuthStateChanged(auth.bindUser);
+    firebaseApp.auth().onAuthStateChanged(auth.bindUser);
   },
   template: '<App/>',
   components: { App }
