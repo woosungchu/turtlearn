@@ -3,10 +3,10 @@
 	<class-head></class-head>
 
 	<div class="class-editor-container">
-	  <class-editor></class-editor>
+	  <class-editor v-bind:value="contents"></class-editor>
 	</div>
 
-	<a @click="addClass" class="button button-clear float-right" href="#"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>
+	<a @click.prevent="addClass" class="button button-clear float-right" href="#"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>
 </div>
 </template>
 
@@ -31,11 +31,17 @@ export default {
 		}
 	},
 
+	data(){
+		return {
+			contents : '### @click.prevent="addClass"'
+		}
+	},
+
   methods:{
 		addClass(){
-			// var newClass = {contents:'### THREE3'}
-			// this.$store.dispatch('addClass',newClass);
-			this.$store.dispatch('toggle');
+			var newClass = {contents: this.contents};
+			this.$store.dispatch('addClass',newClass);
+			// this.$store.dispatch('toggle');
 		}
 	}
 

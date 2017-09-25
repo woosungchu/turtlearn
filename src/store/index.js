@@ -29,11 +29,15 @@ export const store = new Vuex.Store({
       let temp = !context.state._isTrue;
       firebase.database.ref('settings/setting').set(temp);
     },
+    addClass: function(context, item){
+      var newClass = firebase.database.ref('class').push();
+      newClass.set(item);
+    },
     getFirebaseDatabase : function(context){
       // firebase.database.ref('class');
-      firebase.database.ref('settings/setting').on("value", function(snapshot){
+      firebase.database.ref('class').on("value", function(snapshot){
         console.log(snapshot.val())
-        context.commit('toggle',snapshot.val());
+        //context.commit('toggle',snapshot.val());
       })
     }
   }

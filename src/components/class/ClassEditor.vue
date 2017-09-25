@@ -10,7 +10,7 @@
 	</ul>
    	<input id="class-topic-input" @keypress="insertTag" type="text" autocomplete="off" autofocus="">
   </div>
-  <turtle-markdown-editor v-bind:name="editorName" v-bind:value="editorContents"></turtle-markdown-editor>
+  <turtle-markdown-editor v-bind:value="value"></turtle-markdown-editor>
 </div>
 </template>
 
@@ -19,13 +19,12 @@ import TurtleMarkdownEditor from '@/components/common/TurtleMarkdownEditor'
 
 export default {
   name: 'class-editor',
+  props: ['value'],
   components: {
 	  TurtleMarkdownEditor
   },
   data () {
     return {
-      editorName: "contents",
-      editorContents : "",
       topics : ['vue','javascript','java','fluency']
     }
   },
