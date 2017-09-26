@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import firebase from '@/firebase'
+import auth from '@/auth';
 
 Vue.use(Vuex);
 Vue.use(firebase);
@@ -19,6 +20,9 @@ export const store = new Vuex.Store({
   mutations:{
     addClass: function(state, item){
       state.classes.push(item);
+    },
+    allClasses: function(state, items){
+      state.classes = items;
     },
     toggle:function(state,bool){
       state._isTrue = bool;
@@ -41,12 +45,20 @@ export const store = new Vuex.Store({
       })
     },
     getMyClasses(context){
-   	  alert('getMyClasses');
-      firebase.database.ref('class').on("value", function(snapshot){
-      	console.log('test')
-      	console.log(snapshot.val())
-        state.classes = snapshot.val();
-      })
+      let classRef = firebase.database.ref('class');
+      let user = auth.getUser();
+      //TODO need to search by uid
+      classRef.on("value", function(snapshot){
+        context.commit('allClasses',snapshot.val())
+      });
+
+      // classRef.on("value", function(snapshot){
+      //   context.commit('allClasses',snapshot.val())
+      // });
+
+      // classRef.on("value", function(snapshot){
+      //   context.commit('allClasses',snapshot.val())
+      // });
     }
   }
 })

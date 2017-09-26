@@ -13,6 +13,7 @@
 <script>
 import ClassHead from '@/components/class/ClassHead'
 import ClassEditor from '@/components/class/ClassEditor'
+import auth from '@/auth';
 
 export default {
   name: 'class-new',
@@ -20,29 +21,25 @@ export default {
 	  ClassHead,ClassEditor
   },
 
-	created(){
-		this.$store.dispatch('getFirebaseDatabase');
-	},
-
-	computed:{
-		allClasses : function(){
-			var allClasses = this.$store.getters.allClasses;
-			console.log(allClasses)
-		}
-	},
-
 	data(){
 		return {
-			contents : '### @click.prevent="addClass"'
+			contents : '### test test test'
 		}
 	},
 
   methods:{
 		addClass(){
-			var newClass = {contents: this.contents};
-			this.$store.dispatch('addClass',newClass);
-			// this.$store.dispatch('toggle');
+			let user = auth.getUser();
+			let newClass = { contents: '', registerId: '' };
+
+			if(user.uid && this.contents){
+				newClass.contents = this.contents;
+				newClass.registerId = user.uid;
+
+				this.$store.dispatch('addClass',newClass);
+			}
 		}
+
 	}
 
 }

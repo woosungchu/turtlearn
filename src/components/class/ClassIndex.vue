@@ -1,7 +1,7 @@
 <template>
 <div>
     <div class="row">
-    
+
       <div class="column column-66">
         <div class=" event-timeline">
           <p>
@@ -15,39 +15,39 @@
           <hr>
           <p class="event-item">
             <span class="icon-item-type"><i class="fa fa-star"></i></span>
-            <a href="#">joe</a> starred 
+            <a href="#">joe</a> starred
             <a href="#">jsmith/wordpad</a>
             <small>1 hours ago</small>
           </p>
           <p class="event-item">
             <span class="icon-item-type"><i class="fa fa-code-fork"></i></span>
-            <a href="#">ansuz</a> forked 
+            <a href="#">ansuz</a> forked
             <a href="#">derp/crypto</a>
-            to 
+            to
             <a href="#">ansuz/crypto</a>
             <small>2 hours ago</small>
           </p>
           <p class="event-item">
             <span class="icon-item-type"><i class="fa fa-star"></i></span>
-            <a href="#">pro</a> starred 
+            <a href="#">pro</a> starred
             <a href="#">twitter/bootstrap</a>
             <small>3 hours ago</small>
           </p>
           <p class="event-item">
             <span class="icon-item-type"><i class="fa fa-star"></i></span>
-            <a href="#">ninja</a> starred 
+            <a href="#">ninja</a> starred
             <a href="#">jgthms/bulma</a>
             <small>3 hours ago</small>
           </p>
           <p class="event-item" v-for="n in 10">
             <span class="icon-item-type"><i class="fa fa-star"></i></span>
-            <a href="#">username</a> starred 
+            <a href="#">username</a> starred
             <a href="#">name/space</a>
             <small>19 hours ago</small>
           </p>
         </div>
       </div>
-      
+
       <div class="column">
         <nav class="panel">
           <p class="panel-heading">
@@ -96,7 +96,7 @@
             grumpy-cat
           </a>
         </nav>
-        
+
         <div class="panel">
           <p class="panel-heading">
             Your Repositories
@@ -115,7 +115,7 @@
 	          </span>
 	          bulma-website
 	        </li>
-	        
+
 	        <li class="panel-block" href="#" v-for="n in myClasses">
 	          <span class="panel-icon">
 	            <i class="fa fa-book"></i>
@@ -123,9 +123,9 @@
 	          bulma {{n.contents}}
 	        </li>
           </ul>
-          
+
         </div>
-        
+
       </div>
     </div>
 </div>
@@ -135,19 +135,21 @@
 export default {
   name: 'class',
 
-  data () {
-  	console.log(this.$store.getters.allClasses);
-    return {
-      mainClasses: [],
-      myClasses: this.$store.getters.allClasses,
-      starClasses: []
-    }
+  computed:{
+    mainClasses: function(){
+      return this.$store.getters.allClasses;
+    },
+    myClasses: function(){
+      return this.$store.getters.allClasses;
+    },
+    starClasses: function(){
+      return this.$store.getters.allClasses;
+    },
   },
-  
-  created(){
-  	alert('created');
-  
-	this.$store.dispatch('getFirebaseDatabase');
+
+  //created(){
+  beforeCreate(){
+	   this.$store.dispatch('getMyClasses');
   },
 
 }
