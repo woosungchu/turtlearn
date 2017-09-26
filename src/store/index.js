@@ -39,6 +39,14 @@ export const store = new Vuex.Store({
         console.log(snapshot.val())
         //context.commit('toggle',snapshot.val());
       })
+    },
+    getMyClasses(context){
+   	  alert('getMyClasses');
+      firebase.database.ref('class').on("value", function(snapshot){
+      	console.log('test')
+      	console.log(snapshot.val())
+        state.classes = snapshot.val();
+      })
     }
   }
 })

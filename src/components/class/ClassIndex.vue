@@ -96,7 +96,8 @@
             grumpy-cat
           </a>
         </nav>
-        <nav class="panel">
+        
+        <div class="panel">
           <p class="panel-heading">
             Your Repositories
           </p>
@@ -107,49 +108,24 @@
             <a href="#">Sources</a>
             <a href="#">Forks</a>
           </p>
-          <a class="panel-block is-active" href="#">
-            <span class="panel-icon">
-              <i class="fa fa-book"></i>
-            </span>
-            bulma-website
-          </a>
-          <a class="panel-block" href="#">
-            <span class="panel-icon">
-              <i class="fa fa-book"></i>
-            </span>
-            bulma
-          </a>
-          <a class="panel-block" href="#">
-            <span class="panel-icon">
-              <i class="fa fa-book"></i>
-            </span>
-            marksheet
-          </a>
-          <a class="panel-block" href="#">
-            <span class="panel-icon">
-              <i class="fa fa-code-fork"></i>
-            </span>
-            daniellowtw/infBoard
-          </a>
-          <a class="panel-block" href="#">
-            <span class="panel-icon">
-              <i class="fa fa-book"></i>
-            </span>
-            jgthms.github.io
-          </a>
-          <a class="panel-block" href="#">
-            <span class="panel-icon">
-              <i class="fa fa-code-fork"></i>
-            </span>
-            mojs
-          </a>
-          <a class="panel-block" href="#">
-            <span class="panel-icon">
-              <i class="fa fa-book"></i>
-            </span>
-            grumpy-cat
-          </a>
-        </nav>
+          <ul class="panel-body">
+          	<li class="panel-block is-active" href="#">
+	          <span class="panel-icon">
+	            <i class="fa fa-book"></i>
+	          </span>
+	          bulma-website
+	        </li>
+	        
+	        <li class="panel-block" href="#" v-for="n in myClasses">
+	          <span class="panel-icon">
+	            <i class="fa fa-book"></i>
+	          </span>
+	          bulma {{n.contents}}
+	        </li>
+          </ul>
+          
+        </div>
+        
       </div>
     </div>
 </div>
@@ -160,10 +136,19 @@ export default {
   name: 'class',
 
   data () {
+  	console.log(this.$store.getters.allClasses);
     return {
-      msg: 'Welcome to Home'
+      mainClasses: [],
+      myClasses: this.$store.getters.allClasses,
+      starClasses: []
     }
-  }
+  },
+  
+  created(){
+  	alert('created');
+  
+	this.$store.dispatch('getFirebaseDatabase');
+  },
 
 }
 </script>

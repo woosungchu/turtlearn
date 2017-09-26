@@ -13,6 +13,14 @@
 .ellipsis{white-space:nowrap;overflow:hidden; text-overflow:ellipsis; -o-text-overflow:ellipsis;-ms-text-overflow:ellipsis;vertical-align:top;}
 .list-style-none{list-style:none;}
 
+.panel {border-radius: 3px; border:1px solid lightgrey;}
+.panel .panel-tabs{margin:0px;}
+.panel .panel-tabs > * { padding: 2px 0 2px 5px;}
+.panel .panel-heading{padding:10px 5px; background:rgb(246, 248, 250); margin:0px;}
+.panel .panel-body { list-style: none;}
+.panel .panel-body li { margin:0px; padding:3px; padding-left:8px; border-bottom:1px solid lightgrey;}
+.panel .panel-body li:first-child { border-top:1px solid lightgrey;}
+
 .tag{display: inline-flex;-webkit-box-align: center;align-items: center;padding-left: 0.8em;margin: 0.4em 0.4em 0 0;background-color: #f1f8ff;border-radius: 3px;font-size:12px;height:20px;}
 .tag button{display: inline-block;width: 26px;color: #6a737d;background-color: #f1f8ff;border-top: 0;border-right: 0;border-bottom: 0;border-left: 1px solid #b4d9ff;border-top-right-radius: 3px;border-bottom-right-radius: 3px;padding:0;line-height:20px;margin-left:8px;font-size:8px;height:20px;margin:0 0 0 8px;border-radius:0px;}
 
