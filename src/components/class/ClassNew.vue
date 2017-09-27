@@ -30,11 +30,11 @@ export default {
   methods:{
 		addClass(){
 			let user = auth.getUser();
-			let newClass = { contents: '', registerId: '' };
+			let newClass = { contents: '', uid: '' };
 
 			if(user.uid && this.contents){
 				newClass.contents = this.contents;
-				newClass.registerId = user.uid;
+				newClass.uid = user.uid;
 
 				this.$store.dispatch('addClass',newClass);
 			}

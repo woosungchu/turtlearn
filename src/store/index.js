@@ -8,21 +8,28 @@ Vue.use(firebase);
 
 export const store = new Vuex.Store({
   state: {
-    classes:[],
+    allClasses:[],
+    userClasses:[],
     _isTrue:true
   },
   getters: {
     allClasses(state){
-      return state.classes
+      return state.allClasses
+    },
+    userClasses(state){
+      return state.userClasses
     },
     isTrue(sate){return state._isTrue;}
   },
   mutations:{
     addClass: function(state, item){
-      state.classes.push(item);
+      state.allClasses.push(item);
     },
     allClasses: function(state, items){
-      state.classes = items;
+      state.allClasses = items;
+    },
+    userClasses: function(state, items){
+      state.userClasses = items;
     },
     toggle:function(state,bool){
       state._isTrue = bool;
@@ -40,21 +47,24 @@ export const store = new Vuex.Store({
     getFirebaseDatabase : function(context){
       // firebase.database.ref('class');
       firebase.database.ref('class').on("value", function(snapshot){
-        console.log(snapshot.val())
+        // console.log(snapshot.val())
         //context.commit('toggle',snapshot.val());
       })
     },
     getMyClasses(context){
-      let classRef = firebase.database.ref('class');
-      let user = auth.getUser();
-      //TODO need to search by uid
-      classRef.on("value", function(snapshot){
+      let classRef = firebase.database.ref('class/'),
+          user = auth.getUser();
+
+      classRef.once("value", function(snapshot){
         context.commit('allClasses',snapshot.val())
       });
 
-      // classRef.on("value", function(snapshot){
-      //   context.commit('allClasses',snapshot.val())
-      // });
+      if(user && user.uid){
+        classRef.orderByChild("uid").equalTo(user.uid).on("value", function(snapshot){
+          context.commit('userClasses',snapshot.val())
+        });
+      }
+
 
       // classRef.on("value", function(snapshot){
       //   context.commit('allClasses',snapshot.val())

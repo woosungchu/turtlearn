@@ -120,7 +120,7 @@
 	          <span class="panel-icon">
 	            <i class="fa fa-book"></i>
 	          </span>
-	          bulma {{n.contents}}
+	          {{n.contents}}
 	        </li>
           </ul>
 
@@ -140,7 +140,7 @@ export default {
       return this.$store.getters.allClasses;
     },
     myClasses: function(){
-      return this.$store.getters.allClasses;
+      return this.$store.getters.userClasses;
     },
     starClasses: function(){
       return this.$store.getters.allClasses;
@@ -148,7 +148,7 @@ export default {
   },
 
   //created(){
-  beforeCreate(){
+  created(){
 	   this.$store.dispatch('getMyClasses');
   },
 
