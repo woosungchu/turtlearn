@@ -24,7 +24,6 @@
 
 <script>
 import firebase from 'firebase'
-import auth from '@/auth';
 
 export default {
   name: 'headerv',
@@ -53,7 +52,14 @@ export default {
     }
   },
   methods : {
-    logout : auth.logout
+    logout(){
+      firebase.auth().signOut().then(() => {
+        window.location.reload()
+      }, (error) => {
+        console.error(error)
+        window.location.reload()
+      })
+    }
   }
 }
 </script>

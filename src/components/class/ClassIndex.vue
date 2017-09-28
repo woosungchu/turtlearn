@@ -132,6 +132,8 @@
 </template>
 
 <script>
+import {firebaseApp} from '@/firebase'
+
 export default {
   name: 'class',
 
@@ -147,9 +149,11 @@ export default {
     },
   },
 
-  //created(){
   created(){
-	   this.$store.dispatch('getMyClasses');
+    firebaseApp.auth().onAuthStateChanged(user => {
+      user && this.$store.dispatch('getMyClasses');
+    })
+	   this.$store.dispatch('getAllClasses');
   },
 
 }

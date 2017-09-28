@@ -1,3 +1,4 @@
+/*
 import firebase from 'firebase'
 import firebaseUiAuthCss from 'firebaseui/dist/firebaseui.css'
 import firebaseui from 'firebaseui'
@@ -52,3 +53,4 @@ const initAuthUI = (selector) => {
 }
 
 export default { getUser, bindUser, logout, initAuthUI }
+*/

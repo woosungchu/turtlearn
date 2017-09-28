@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import firebase from '@/firebase'
-import auth from '@/auth';
 
 Vue.use(Vuex);
 Vue.use(firebase);
@@ -51,24 +50,21 @@ export const store = new Vuex.Store({
         //context.commit('toggle',snapshot.val());
       })
     },
-    getMyClasses(context){
-      let classRef = firebase.database.ref('class/'),
-          user = auth.getUser();
-
-      classRef.once("value", function(snapshot){
+    getAllClasses(context){
+      firebase.database.ref('class/').once("value", function(snapshot){
         context.commit('allClasses',snapshot.val())
       });
+    },
+    getMyClasses(context){
+      let classRef = firebase.database.ref('class/'),
+          user = firebase.firebaseApp.auth().currentUser;
 
       if(user && user.uid){
         classRef.orderByChild("uid").equalTo(user.uid).on("value", function(snapshot){
           context.commit('userClasses',snapshot.val())
         });
       }
-
-
-      // classRef.on("value", function(snapshot){
-      //   context.commit('allClasses',snapshot.val())
-      // });
     }
+
   }
 })

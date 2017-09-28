@@ -13,7 +13,7 @@
 <script>
 import ClassHead from '@/components/class/ClassHead'
 import ClassEditor from '@/components/class/ClassEditor'
-import auth from '@/auth';
+import {firebaseApp} from '@/firebase'
 
 export default {
   name: 'class-new',
@@ -29,7 +29,7 @@ export default {
 
   methods:{
 		addClass(){
-			let user = auth.getUser();
+			let user = firebaseApp.auth().currentUser;
 			let newClass = { contents: '', uid: '' };
 
 			if(user.uid && this.contents){
