@@ -116,11 +116,11 @@
 	          bulma-website
 	        </li>
 
-	        <li class="panel-block" href="#" v-for="n in myClasses">
+	        <li class="panel-block" href="#" v-for="(value,key) in myClasses">
 	          <span class="panel-icon">
 	            <i class="fa fa-book"></i>
 	          </span>
-	          {{n.contents}}
+            <router-link v-bind:to=" '/class/view/' + key" class="nav-item">{{value.contents}}</router-link>
 	        </li>
           </ul>
 
@@ -135,7 +135,7 @@
 import {firebaseApp} from '@/firebase'
 
 export default {
-  name: 'class',
+  name: 'class-index',
 
   computed:{
     mainClasses: function(){
